@@ -1,0 +1,89 @@
+{
+  "start": {
+    "description": "Benvingut a la mansió misteriosa. Troba la sortida per escapar.",
+    "next": "/room1"
+  },
+  "room1": {
+    "description": "Estàs a la sala principal de la mansió. Veuràs una taula amb una clau i una nota. La nota diu: 'La clau obre una de les portes de la casa. Troba la porta correcta per avançar.'",
+    "items": [
+      {
+        "id": "clau",
+        "description": "Una clau antiga de ferro"
+      },
+      {
+        "id": "nota",
+        "description": "endpoint:+door"
+      }
+    ],
+    "conditions": [
+      {
+        "action": "POST",
+        "endpoint": "/room1-door"
+      }
+    ]
+  },
+  "room1-door": {
+    "description": "Has trobat la porta que la clau obre. Entra per avançar al següent nivell.",
+    "next": "/room2"
+  },
+  "room2": {
+    "description": "Estàs a una altra habitació de la mansió. Aquí hi ha un segon desafiament.",
+    "conditions": [
+      {
+        "action": "PUT",
+        "endpoint": "/room2-painting",
+        "description": "Mou el quadre per revelar un passadís secret."
+      },
+      {
+        "action": "DELETE",
+        "endpoint": "/room2-obstacle",
+        "description": "Elimina l'obstacle per avançar.",
+        "next": "/room3"
+      }
+    ]
+  },
+  "room3": {
+    "description": "Has arribat a una nova habitació. Aquesta vegada, hi ha una caixa tancada al mig de la sala.",
+    "items": [
+      {
+        "id": "caixa",
+        "description": "Una caixa de fusta tancada amb una combinació de tres dígits. ANIVERSARI DE ZHIJUN"
+      }
+    ],
+    "conditions": [
+      {
+        "action": "PUT",
+        "endpoint": "/room3-0509",
+        "description": "Introdueix la combinació correcta per obrir la caixa. ANIVERSARI DE ZHIJUN"
+      }
+    ]
+  },
+  "room3-0509": {
+    "description": "Has introduït la combinació correcta. La caixa s'obre i trobes una clau d'argent.",
+    "next": "/room4"
+  },
+  "room4": {
+    "description": "Arribes a l'última habitació de la mansió. Aquí hi ha un petit boto que has de trobar.",
+    "conditions": [
+      {
+        "action": "GET",
+        "endpoint": "/room4-enigma",
+        "description": "boto per sortir."
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "clau",
+      "description": "Una clau antiga de ferro"
+    },
+    {
+      "id": "nota",
+      "description": "Una nota escrita a mà"
+    },
+    {
+      "id": "caixa",
+      "description": "Una caixa de fusta tancada amb una combinació de tres dígits."
+    }
+  ]
+}
